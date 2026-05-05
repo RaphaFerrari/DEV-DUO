@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev Duo Sites — Desenvolvimento Web de Alta Performance</title>
+  <meta name="description" content="Especialistas em Landing Pages de alta conversão e Sites Institucionais modernos. Fale direto com os desenvolvedores, sem intermediários." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / WhatsApp / Redes Sociais -->
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://devduo.tec.br/" />
+  <meta property="og:title"        content="Dev Duo Sites — Desenvolvimento Web de Alta Performance" />
+  <meta property="og:description"  content="Especialistas em Landing Pages de alta conversão e Sites Institucionais modernos. Fale direto com os desenvolvedores, sem intermediários." />
+  <meta property="og:image"        content="https://devduo.tec.br/preview.jpg" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"    content="Dev Duo Sites — Desenvolvimento Web de Alta Performance" />
+  <meta property="og:locale"       content="pt_BR" />
+  <meta property="og:site_name"    content="Dev Duo Sites" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Dev Duo Sites — Desenvolvimento Web de Alta Performance" />
+  <meta name="twitter:description" content="Especialistas em Landing Pages de alta conversão e Sites Institucionais modernos. Fale direto com os desenvolvedores, sem intermediários." />
+  <meta name="twitter:image"       content="https://devduo.tec.br/preview.jpg" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body:    ['DM Sans', 'sans-serif'],
+          },
+          keyframes: {
+            float: {
+              '0%,100%': { transform: 'translateY(0px)' },
+              '50%':     { transform: 'translateY(-14px)' },
+            },
+            glowPulse: {
+              '0%,100%': { boxShadow: '0 0 20px rgba(59,130,246,0.3)' },
+              '50%':     { boxShadow: '0 0 50px rgba(59,130,246,0.7)' },
+            },
+            dotPulse: {
+              '0%,100%': { opacity: '1' },
+              '50%':     { opacity: '0.25' },
+            },
+          },
+          animation: {
+            'float':      'float 6s ease-in-out infinite',
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+            'dot-pulse':  'dotPulse 2s ease-in-out infinite',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: 'DM Sans', sans-serif; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #070d1a; }
+    ::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 10px; }
+
+    /* Grid hero background */
+    .grid-bg {
+      background-color: #070d1a;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Glow orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+    .orb-blue   { background: rgba(59,130,246,0.18); }
+    .orb-indigo { background: rgba(99,102,241,0.14); }
+
+    /* Glass card */
+    .glass {
+      background: rgba(13,22,41,0.75);
+      border: 1px solid rgba(59,130,246,0.15);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    /* Gradient text */
+    .grad-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Primary button */
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      transition: filter 0.3s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover  { filter: brightness(1.15); transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* Outline button */
+    .btn-outline {
+      border: 1.5px solid rgba(59,130,246,0.45);
+      transition: border-color 0.3s, background 0.3s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: #3b82f6;
+      background: rgba(59,130,246,0.10);
+      transform: translateY(-2px);
+    }
+
+    /* Card hover */
+    .card-hover {
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+      border: 1px solid rgba(59,130,246,0.10);
+    }
+    .card-hover:hover {
+      border-color: rgba(59,130,246,0.40);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(59,130,246,0.14);
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.10s; }
+    .reveal.d2 { transition-delay: 0.20s; }
+    .reveal.d3 { transition-delay: 0.30s; }
+
+    /* Nav underline */
+    .nav-link { position: relative; transition: color 0.2s; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: #3b82f6;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover { color: #60a5fa; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(59,130,246,0.10);
+      border: 1px solid rgba(59,130,246,0.30);
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 99px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: #3b82f6;
+      border-radius: 50%;
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+
+    /* Form inputs */
+    .form-input {
+      background: rgba(13,22,41,0.85);
+      border: 1px solid rgba(59,130,246,0.20);
+      color: #e2e8f0;
+      width: 100%;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.18);
+    }
+    .form-input::placeholder { color: #4a556a; }
+
+    /* Mobile menu */
+    #mobile-menu       { display: none; }
+    #mobile-menu.open  { display: flex; }
+
+    /* Code block */
+    .code-block {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    /* Stat number */
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2.4rem;
+      background: linear-gradient(135deg, #60a5fa, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Step line */
+    .step-line {
+      width: 1px;
+      height: 18px;
+      background: rgba(59,130,246,0.25);
+      margin-left: 15px;
+    }
+  </style>
+</head>
+
+<body class="bg-[#070d1a] text-slate-200 overflow-x-hidden">
+
+<!-- ════════════ NAVBAR ════════════ -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+
+      <a href="#home" aria-label="Dev Duo Sites">
+        <span class="font-display text-lg md:text-xl font-extrabold tracking-tight leading-none">
+          <span class="text-blue-400">&lt;/&gt;</span>
+          <span class="text-white ml-1">DEV DUO</span>
+          <span class="text-slate-400 font-light text-base ml-1">Sites</span>
+        </span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#servicos"   class="nav-link text-slate-300 text-sm font-medium">Serviços</a>
+        <a href="#quem-somos" class="nav-link text-slate-300 text-sm font-medium">Quem Somos</a>
+        <a href="#contato"    class="nav-link text-slate-300 text-sm font-medium">Contato</a>
+        <a href="#contato" class="btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-xl inline-block">
+          Solicitar Orçamento
+        </a>
+      </div>
+
+      <button id="menu-toggle" class="md:hidden text-slate-300 p-2 focus:outline-none" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="flex-col gap-3 pb-6 pt-1 md:hidden">
+      <a href="#servicos"   class="block text-slate-300 text-sm font-medium py-2.5 border-b border-slate-800" onclick="closeMobileMenu()">Serviços</a>
+      <a href="#quem-somos" class="block text-slate-300 text-sm font-medium py-2.5 border-b border-slate-800" onclick="closeMobileMenu()">Quem Somos</a>
+      <a href="#contato"    class="block text-slate-300 text-sm font-medium py-2.5 border-b border-slate-800" onclick="closeMobileMenu()">Contato</a>
+      <a href="#contato" class="btn-primary text-white text-sm font-semibold px-5 py-3 rounded-xl text-center block mt-1" onclick="closeMobileMenu()">
+        Solicitar Orçamento
+      </a>
+    </div>
+  </nav>
+</header>
+
+
+<!-- ════════════ HERO ════════════ -->
+<section id="home" class="grid-bg relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  <div class="orb orb-blue   w-96 h-96 top-10  -left-24"></div>
+  <div class="orb orb-indigo w-80 h-80 bottom-20 -right-20"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 w-full">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+      <!-- Headline -->
+      <div class="text-center lg:text-left">
+        <div class="badge mb-6 mx-auto lg:mx-0">
+          <span class="badge-dot"></span>
+          Disponível para novos projetos
+        </div>
+
+        <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.1] tracking-tight text-white mb-6">
+          Construímos a<br/>
+          <span class="grad-text">presença digital</span><br/>
+          que o seu negócio<br/>precisa.
+        </h1>
+
+        <p class="text-slate-400 text-base sm:text-lg leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0">
+          Somos desenvolvedores especialistas na criação de
+          <strong class="text-slate-200 font-medium">Landing Pages de alta conversão</strong> e
+          <strong class="text-slate-200 font-medium">Sites Institucionais</strong>
+          de alta performance e tecnologia.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="#contato"
+             class="btn-primary animate-glow-pulse text-white font-bold px-8 py-4 rounded-2xl text-base inline-flex items-center justify-center gap-2 shadow-lg shadow-blue-900/40">
+            🚀 <span>Quero decolar meu projeto</span>
+          </a>
+          <a href="#servicos"
+             class="btn-outline text-slate-200 font-medium px-8 py-4 rounded-2xl text-base inline-flex items-center justify-center gap-2">
+            <span>Ver Serviços</span>
+            <i class="fa-solid fa-arrow-down text-sm text-blue-400"></i>
+          </a>
+        </div>
+
+        <div class="mt-14 grid grid-cols-3 gap-4 max-w-xs mx-auto lg:mx-0">
+          <div><div class="stat-num">100%</div><p class="text-slate-500 text-xs mt-1">Responsivo</p></div>
+          <div><div class="stat-num">A+</div><p class="text-slate-500 text-xs mt-1">Performance</p></div>
+          <div><div class="stat-num">2×</div><p class="text-slate-500 text-xs mt-1">Devs dedicados</p></div>
+        </div>
+      </div>
+
+      <!-- Code window -->
+      <div class="hidden lg:block animate-float">
+        <div class="glass rounded-2xl overflow-hidden shadow-2xl shadow-blue-900/20">
+          <div class="flex items-center gap-2 px-5 py-3 border-b border-slate-700/50 bg-slate-900/60">
+            <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
+            <span class="ml-4 text-slate-500 text-xs">index.html — Dev Duo Sites</span>
+          </div>
+          <div class="p-6 code-block text-slate-300">
+            <div><span class="text-slate-600 select-none mr-3">1</span><span class="text-pink-400">&lt;!DOCTYPE</span> <span class="text-blue-300">html</span><span class="text-pink-400">&gt;</span></div>
+            <div><span class="text-slate-600 select-none mr-3">2</span><span class="text-pink-400">&lt;html</span> <span class="text-blue-300">lang</span>=<span class="text-green-400">"pt-BR"</span><span class="text-pink-400">&gt;</span></div>
+            <div><span class="text-slate-600 select-none mr-3">3</span>  <span class="text-pink-400">&lt;head&gt;</span></div>
+            <div><span class="text-slate-600 select-none mr-3">4</span>    <span class="text-slate-500">/* 🚀 Dev Duo Sites */</span></div>
+            <div><span class="text-slate-600 select-none mr-3">5</span>    <span class="text-yellow-300">title</span>: <span class="text-green-400">"Alta Performance"</span>,</div>
+            <div><span class="text-slate-600 select-none mr-3">6</span>    <span class="text-yellow-300">seo</span>: <span class="text-blue-300">true</span>,</div>
+            <div><span class="text-slate-600 select-none mr-3">7</span>    <span class="text-yellow-300">responsive</span>: <span class="text-blue-300">true</span>,</div>
+            <div><span class="text-slate-600 select-none mr-3">8</span>    <span class="text-yellow-300">conversion</span>: <span class="text-purple-400">+300%</span></div>
+            <div><span class="text-slate-600 select-none mr-3">9</span>  <span class="text-pink-400">&lt;/head&gt;</span></div>
+            <div><span class="text-slate-600 select-none mr-3">10</span> <span class="text-pink-400">&lt;body&gt;</span></div>
+            <div class="mt-1"><span class="text-slate-600 select-none mr-3">11</span>   <span class="text-blue-400">const</span> <span class="text-yellow-300">resultado</span> = <span class="text-green-400">await</span></div>
+            <div><span class="text-slate-600 select-none mr-3">12</span>     <span class="text-yellow-300">DevDuo</span>.<span class="text-blue-300">build</span>({</div>
+            <div><span class="text-slate-600 select-none mr-3">13</span>       <span class="text-yellow-300">cliente</span>: <span class="text-green-400">"Você"</span>,</div>
+            <div><span class="text-slate-600 select-none mr-3">14</span>       <span class="text-yellow-300">meta</span>: <span class="text-green-400">"Crescer"</span></div>
+            <div><span class="text-slate-600 select-none mr-3">15</span>     });</div>
+            <div class="mt-2 text-green-400"><span class="text-slate-600 select-none mr-3">16</span> ✓ Build successful <span class="animate-pulse">█</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#070d1a] to-transparent pointer-events-none"></div>
+</section>
+
+
+<!-- ════════════ SERVIÇOS ════════════ -->
+<section id="servicos" class="py-24 bg-[#070d1a] relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-16 reveal">
+      <span class="badge mb-5">Nossos Serviços</span>
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-4 leading-tight">
+        O que entregamos para o<br/><span class="grad-text">seu negócio crescer</span>
+      </h2>
+      <p class="text-slate-400 mt-5 max-w-xl mx-auto text-base leading-relaxed">
+        Cada projeto é desenvolvido com atenção total aos detalhes, performance e resultados reais.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Sites Institucionais -->
+      <div class="card-hover glass rounded-2xl p-8 reveal d1">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center mb-6">
+          <i class="fa-solid fa-building text-blue-400 text-xl"></i>
+        </div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Sites Institucionais</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+          Autoridade e presença digital para marcas e empresas. Sites modernos que transmitem credibilidade e convertem visitantes em clientes.
+        </p>
+        <ul class="space-y-2.5">
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> Design exclusivo e responsivo</li>
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> Otimizado para SEO</li>
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> Carregamento ultra-rápido</li>
+        </ul>
+      </div>
+
+      <!-- Landing Pages -->
+      <div class="card-hover glass rounded-2xl p-8 reveal d2" style="border-color:rgba(59,130,246,0.30)">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center mb-6">
+          <i class="fa-solid fa-chart-line text-blue-400 text-xl"></i>
+        </div>
+        <div class="flex items-center gap-2 mb-3">
+          <h3 class="font-display font-bold text-xl text-white">Landing Pages</h3>
+          <span class="text-xs bg-blue-600/20 text-blue-300 border border-blue-500/30 px-2.5 py-0.5 rounded-full font-medium">Popular</span>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+          Páginas estratégicas focadas em capturar leads e aumentar vendas. Cada elemento pensado para maximizar a conversão.
+        </p>
+        <ul class="space-y-2.5">
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> Copy persuasivo e estratégico</li>
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> CTAs de alta conversão</li>
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> Integração com Analytics</li>
+        </ul>
+      </div>
+
+      <!-- Performance -->
+      <div class="card-hover glass rounded-2xl p-8 reveal d3">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center mb-6">
+          <i class="fa-solid fa-bolt text-blue-400 text-xl"></i>
+        </div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Otimização e Performance</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+          Sites rápidos, com código limpo e otimizados para SEO. Melhore o ranqueamento no Google e a experiência do usuário.
+        </p>
+        <ul class="space-y-2.5">
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> Nota 90+ no PageSpeed</li>
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> Código limpo e semântico</li>
+          <li class="flex items-center gap-2 text-slate-300 text-sm"><i class="fa-solid fa-check text-blue-400 text-xs w-3"></i> Core Web Vitals aprovados</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ POR QUE A DEV DUO? ════════════ -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-[#070d1a] via-[#0d1629] to-[#070d1a]"></div>
+  <div class="orb orb-blue w-96 h-96 top-0 right-0 opacity-10"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+      <div class="reveal">
+        <span class="badge mb-6">Por que a Dev Duo?</span>
+        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-4 mb-5 leading-tight">
+          Você fala direto com<br/>
+          <span class="grad-text">quem vai construir</span><br/>o seu projeto.
+        </h2>
+        <p class="text-slate-400 leading-relaxed mb-8 text-base">
+          Sem intermediários, sem telefone sem fio. Na Dev Duo você conversa diretamente com os desenvolvedores responsáveis pelo seu projeto — do início ao fim. Isso garante agilidade, transparência e um resultado que realmente reflete a sua visão.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="glass rounded-xl p-4">
+            <i class="fa-solid fa-comments text-blue-400 text-xl mb-2 block"></i>
+            <p class="text-white font-semibold text-sm">Comunicação Direta</p>
+            <p class="text-slate-500 text-xs mt-1">WhatsApp com os devs</p>
+          </div>
+          <div class="glass rounded-xl p-4">
+            <i class="fa-solid fa-clock text-blue-400 text-xl mb-2 block"></i>
+            <p class="text-white font-semibold text-sm">Entrega Ágil</p>
+            <p class="text-slate-500 text-xs mt-1">Prazos que respeitamos</p>
+          </div>
+          <div class="glass rounded-xl p-4">
+            <i class="fa-solid fa-shield-halved text-blue-400 text-xl mb-2 block"></i>
+            <p class="text-white font-semibold text-sm">Qualidade Garantida</p>
+            <p class="text-slate-500 text-xs mt-1">Revisões incluídas</p>
+          </div>
+          <div class="glass rounded-xl p-4">
+            <i class="fa-solid fa-rocket text-blue-400 text-xl mb-2 block"></i>
+            <p class="text-white font-semibold text-sm">Alta Performance</p>
+            <p class="text-slate-500 text-xs mt-1">Sites rápidos e modernos</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl p-8 reveal d1">
+        <div class="flex items-center gap-3 mb-7">
+          <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+          <span class="text-green-400 text-sm font-medium">Nosso processo de trabalho</span>
+        </div>
+        <div class="space-y-1">
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">1</div>
+            <div class="pt-1"><p class="text-white font-semibold text-sm">Briefing e Alinhamento</p><p class="text-slate-500 text-xs mt-1">Entendemos sua visão, público e objetivos de negócio.</p></div>
+          </div>
+          <div class="step-line"></div>
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">2</div>
+            <div class="pt-1"><p class="text-white font-semibold text-sm">Design & Protótipo</p><p class="text-slate-500 text-xs mt-1">Criamos o layout e aprovamos junto com você antes de codar.</p></div>
+          </div>
+          <div class="step-line"></div>
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm">3</div>
+            <div class="pt-1"><p class="text-white font-semibold text-sm">Desenvolvimento</p><p class="text-slate-500 text-xs mt-1">Código limpo, responsivo e otimizado para performance máxima.</p></div>
+          </div>
+          <div class="step-line"></div>
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-green-600/20 border border-green-500/40 flex items-center justify-center flex-shrink-0 text-green-400 font-bold text-sm">✓</div>
+            <div class="pt-1"><p class="text-white font-semibold text-sm">Entrega e Deploy</p><p class="text-slate-500 text-xs mt-1">Publicamos, testamos e entregamos o projeto no ar pra você.</p></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ QUEM SOMOS ════════════ -->
+<section id="quem-somos" class="py-24 bg-[#070d1a] relative overflow-hidden">
+  <div class="orb orb-indigo w-96 h-96 -bottom-20 -left-20 opacity-20"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+    <div class="text-center mb-16 reveal">
+      <span class="badge mb-5">A Equipe</span>
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-4 leading-tight">
+        Conheça os <span class="grad-text">dois devs</span> por trás<br/>de cada projeto
+      </h2>
+      <p class="text-slate-400 mt-5 max-w-xl mx-auto leading-relaxed">
+        Dois desenvolvedores apaixonados por tecnologia e resultados. Você nunca fala com um assistente — sempre com quem está construindo o seu site.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
+
+      <!-- Raphael Ferrari -->
+      <div class="card-hover glass rounded-2xl p-8 text-center reveal d1">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mx-auto mb-5 text-2xl font-display font-extrabold text-white shadow-lg shadow-blue-900/40">
+          RF
+        </div>
+        <h3 class="font-display font-bold text-xl text-white mb-1">Raphael Ferrari</h3>
+        <p class="text-blue-400 text-sm font-medium mb-6">Desenvolvedor WEB</p>
+        <div class="space-y-3 mb-7">
+          <a href="https://wa.me/5531993404537?text=Olá%20Raphael!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento."
+             target="_blank" rel="noopener"
+             class="flex items-center justify-center gap-2 text-slate-300 text-sm hover:text-green-400 transition-colors">
+            <i class="fa-brands fa-whatsapp text-green-400"></i>(31) 99340-4537
+          </a>
+          <a href="https://www.linkedin.com/in/raphael-ferrari-16b919199/"
+             target="_blank" rel="noopener"
+             class="flex items-center justify-center gap-2 text-slate-300 text-sm hover:text-blue-400 transition-colors">
+            <i class="fa-brands fa-linkedin text-blue-400"></i>LinkedIn
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-2 justify-center">
+          <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full">HTML/CSS</span>
+          <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full">JavaScript</span>
+          <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full">UI/UX</span>
+          <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full">SEO</span>
+        </div>
+      </div>
+
+      <!-- Piter Alex -->
+      <div class="card-hover glass rounded-2xl p-8 text-center reveal d2">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center mx-auto mb-5 text-2xl font-display font-extrabold text-white shadow-lg shadow-indigo-900/40">
+          PA
+        </div>
+        <h3 class="font-display font-bold text-xl text-white mb-1">Piter Alex</h3>
+        <p class="text-blue-400 text-sm font-medium mb-6">Desenvolvedor WEB</p>
+        <div class="space-y-3 mb-7">
+          <a href="https://wa.me/5531987958165?text=Olá%20Piter!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento."
+             target="_blank" rel="noopener"
+             class="flex items-center justify-center gap-2 text-slate-300 text-sm hover:text-green-400 transition-colors">
+            <i class="fa-brands fa-whatsapp text-green-400"></i>(31) 98795-8165
+          </a>
+          <a href="https://www.linkedin.com/in/piter-alex-19a849219/"
+             target="_blank" rel="noopener"
+             class="flex items-center justify-center gap-2 text-slate-300 text-sm hover:text-blue-400 transition-colors">
+            <i class="fa-brands fa-linkedin text-blue-400"></i>LinkedIn
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-2 justify-center">
+          <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full">React</span>
+          <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full">Node.js</span>
+          <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full">Performance</span>
+          <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full">APIs</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ CONTATO ════════════ -->
+<section id="contato" class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-[#070d1a] to-[#0d1629]"></div>
+  <div class="orb orb-blue w-96 h-96 top-10 right-0 opacity-10"></div>
+
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+    <div class="text-center mb-12 reveal">
+      <span class="badge mb-5">Contato</span>
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-4 leading-tight">
+        Vamos construir algo<br/><span class="grad-text">incrível juntos?</span>
+      </h2>
+      <p class="text-slate-400 mt-4 text-base">
+        Preencha o formulário e abriremos o WhatsApp com tudo pronto para enviar. 📲
+      </p>
+    </div>
+
+    <div class="glass rounded-2xl p-8 sm:p-10 reveal d1">
+      <form id="contact-form" class="space-y-5" onsubmit="handleSubmit(event)" novalidate>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="field-nome" class="block text-slate-300 text-sm font-medium mb-2">Nome completo *</label>
+            <input id="field-nome" type="text" placeholder="João Silva" required
+              class="form-input px-4 py-3 rounded-xl text-sm" />
+          </div>
+          <div>
+            <label for="field-tel" class="block text-slate-300 text-sm font-medium mb-2">Telefone / WhatsApp</label>
+            <input id="field-tel" type="tel" placeholder="(31) 99999-9999"
+              class="form-input px-4 py-3 rounded-xl text-sm" />
+          </div>
+        </div>
+
+        <div>
+          <label for="field-tipo" class="block text-slate-300 text-sm font-medium mb-2">Tipo de projeto</label>
+          <select id="field-tipo" class="form-input px-4 py-3 rounded-xl text-sm">
+            <option value="">Selecione...</option>
+            <option value="Landing Page">Landing Page</option>
+            <option value="Site Institucional">Site Institucional</option>
+            <option value="Otimização / Performance">Otimização / Performance</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="field-projeto" class="block text-slate-300 text-sm font-medium mb-2">Sobre o Projeto *</label>
+          <textarea id="field-projeto" rows="4"
+            placeholder="Conte um pouco sobre o seu negócio, objetivos e o que você precisa..."
+            required class="form-input px-4 py-3 rounded-xl text-sm resize-none"></textarea>
+        </div>
+
+        <button id="submit-btn" type="submit"
+          class="btn-primary w-full py-4 rounded-xl font-bold text-white text-base flex items-center justify-center gap-2">
+          <span id="submit-label">Enviar pelo WhatsApp</span>
+          <i id="submit-icon" class="fa-brands fa-whatsapp text-lg"></i>
+        </button>
+
+        <p class="text-slate-500 text-xs text-center">
+          Ao clicar, o WhatsApp abrirá com sua mensagem já preenchida.
+        </p>
+      </form>
+
+      <div class="mt-8 pt-6 border-t border-slate-700/50 text-center">
+        <p class="text-slate-500 text-sm mb-4">Ou chame diretamente no WhatsApp:</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="https://wa.me/5531993404537?text=Olá%20Raphael!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento."
+             target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 bg-green-600/20 border border-green-500/40 text-green-400 font-medium text-sm px-5 py-3 rounded-xl hover:bg-green-600/30 transition-all">
+            <i class="fa-brands fa-whatsapp text-lg"></i>Raphael Ferrari
+          </a>
+          <a href="https://wa.me/5531987958165?text=Olá%20Piter!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento."
+             target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 bg-green-600/20 border border-green-500/40 text-green-400 font-medium text-sm px-5 py-3 rounded-xl hover:bg-green-600/30 transition-all">
+            <i class="fa-brands fa-whatsapp text-lg"></i>Piter Alex
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="bg-[#070d1a] border-t border-slate-800/60 py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+      <div class="text-center md:text-left">
+        <span class="font-display font-extrabold text-lg tracking-tight">
+          <span class="text-blue-400">&lt;/&gt;</span>
+          <span class="text-white ml-1">DEV DUO</span>
+          <span class="text-slate-400 font-light text-base ml-1">Sites</span>
+        </span>
+        <p class="text-slate-500 text-xs mt-1">Desenvolvimento web de alta performance.</p>
+      </div>
+
+      <div class="flex items-center gap-6 flex-wrap justify-center">
+        <a href="https://www.linkedin.com/in/raphael-ferrari-16b919199/" target="_blank" rel="noopener"
+           class="text-slate-500 hover:text-blue-400 transition-colors text-sm">
+          <i class="fa-brands fa-linkedin mr-1"></i>Raphael
+        </a>
+        <a href="https://www.linkedin.com/in/piter-alex-19a849219/" target="_blank" rel="noopener"
+           class="text-slate-500 hover:text-blue-400 transition-colors text-sm">
+          <i class="fa-brands fa-linkedin mr-1"></i>Piter
+        </a>
+        <a href="https://wa.me/5531993404537" target="_blank" rel="noopener"
+           class="text-slate-500 hover:text-green-400 transition-colors text-sm">
+          <i class="fa-brands fa-whatsapp mr-1"></i>WhatsApp
+        </a>
+      </div>
+
+      <p class="text-slate-600 text-xs text-center md:text-right">
+        © 2026 Dev Duo Sites. Todos os direitos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════ JAVASCRIPT ════════════ -->
+<script>
+  // ── Navbar: efeito glassmorphism ao rolar ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      navbar.style.background     = 'rgba(7,13,26,0.96)';
+      navbar.style.backdropFilter = 'blur(18px)';
+      navbar.style.borderBottom   = '1px solid rgba(59,130,246,0.10)';
+    } else {
+      navbar.style.background     = 'transparent';
+      navbar.style.backdropFilter = 'none';
+      navbar.style.borderBottom   = 'none';
+    }
+  }, { passive: true });
+
+  // ── Menu mobile ──
+  document.getElementById('menu-toggle').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  // ── Scroll reveal com IntersectionObserver ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Smooth scroll para links âncora ──
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        closeMobileMenu();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── Formulário → WhatsApp ──
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const nome    = document.getElementById('field-nome').value.trim();
+    const tel     = document.getElementById('field-tel').value.trim();
+    const tipo    = document.getElementById('field-tipo').value || 'Não informado';
+    const projeto = document.getElementById('field-projeto').value.trim();
+
+    if (!nome || !projeto) {
+      alert('Por favor, preencha o nome e a descrição do projeto.');
+      return;
+    }
+
+    // Monta a mensagem formatada
+    const msg = [
+      'Olá! Vim pelo site da *Dev Duo Sites* e gostaria de um orçamento. 🚀',
+      '',
+      `*Nome:* ${nome}`,
+      `*Telefone:* ${tel || 'Não informado'}`,
+      `*Tipo de projeto:* ${tipo}`,
+      '*Sobre o projeto:*',
+      projeto,
+    ].join('\n');
+
+    const waURL = `https://wa.me/5531993404537?text=${encodeURIComponent(msg)}`;
+
+    // Feedback visual no botão
+    const btn   = document.getElementById('submit-btn');
+    const label = document.getElementById('submit-label');
+    const icon  = document.getElementById('submit-icon');
+
+    label.textContent = 'Abrindo WhatsApp...';
+    icon.className    = 'fa-solid fa-spinner fa-spin text-lg';
+    btn.disabled      = true;
+
+    setTimeout(() => {
+      window.open(waURL, '_blank');
+      label.textContent = 'Enviar pelo WhatsApp';
+      icon.className    = 'fa-brands fa-whatsapp text-lg';
+      btn.disabled      = false;
+      e.target.reset();
+    }, 900);
+  }
+</script>
+
+</body>
+</html>
