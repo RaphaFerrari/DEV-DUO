@@ -17,12 +17,12 @@
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:site_name" content="Dev Duo Sites" />
 
-  <!-- Fonts -->
+  <!-- Fonts: Syne + DM Sans + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- Bibliotecas de Animação e Estilos -->
+  <!-- Bibliotecas Externas -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -48,17 +48,20 @@
   </script>
 
   <style>
-    :root {
-      --cyan-glow: rgba(0, 200, 240, 0.3);
-    }
-
     /* Reset & Base */
     body {
       background-color: #070d1a;
       color: #e2e8f0;
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden;
-      selection-background: var(--cyan-glow);
+    }
+
+    /* Correção de Sobreposição de Letras */
+    .headline-main {
+      font-family: 'Syne', sans-serif;
+      line-height: 1.15; /* Aumentado de 1.05 para evitar colisões verticais */
+      letter-spacing: -0.01em; /* Reduzido de tight para quase normal para evitar colisões horizontais */
+      text-wrap: balance;
     }
 
     /* Scrollbar Premium */
@@ -66,22 +69,22 @@
     ::-webkit-scrollbar-track { background: #070d1a; }
     ::-webkit-scrollbar-thumb { background: linear-gradient(#070d1a, #00C8F0, #070d1a); border-radius: 10px; }
 
-    /* Background Mesh & Texture */
+    /* Background Textures */
     .bg-texture {
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     }
 
-    /* Hero Mesh Gradients */
     .hero-mesh {
       position: absolute; width: 100%; height: 100%; top: 0; left: 0;
       background: 
         radial-gradient(circle at 20% 30%, rgba(0, 200, 240, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 80% 70%, rgba(26, 107, 181, 0.1) 0%, transparent 40%);
-      filter: blur(60px);
+      filter: blur(80px);
+      z-index: -1;
     }
 
-    /* Modern Glassmorphism */
+    /* Glassmorphism Refinado */
     .glass-nav {
       background: rgba(7, 13, 26, 0.7);
       backdrop-filter: blur(20px) saturate(180%);
@@ -91,73 +94,56 @@
     .glass-card {
       background: linear-gradient(135deg, rgba(13, 22, 41, 0.6) 0%, rgba(13, 22, 41, 0.4) 100%);
       border: 1px solid rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .glass-card:hover {
       border-color: rgba(0, 200, 240, 0.3);
-      background: rgba(13, 22, 41, 0.8);
-      transform: translateY(-5px) scale(1.01);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 200, 240, 0.05);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
-    /* Tech Text Highlight */
+    /* Destaque de Texto */
     .text-highlight {
       background: linear-gradient(90deg, #00C8F0, #1A6BB5);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      position: relative;
+      white-space: nowrap;
     }
 
-    .text-highlight::after {
-      content: ''; position: absolute; left: 0; bottom: 4px;
-      width: 100%; height: 1px;
-      background: linear-gradient(90deg, transparent, #00C8F0, transparent);
-      opacity: 0.5;
-    }
-
-    /* Botões Premium */
+    /* Botões */
     .btn-glow {
       position: relative; overflow: hidden;
       transition: all 0.3s ease;
     }
-
-    .btn-glow::before {
+    .btn-glow::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      transform: translateX(-100%); transition: 0.5s;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%); transition: 0.6s;
     }
+    .btn-glow:hover::after { transform: translateX(100%); }
 
-    .btn-glow:hover::before { transform: translateX(100%); }
-
-    /* Animated Grid */
-    .grid-bg {
-      position: absolute; inset: 0; z-index: -1;
-      background-image: radial-gradient(circle at 1px 1px, rgba(0,200,240,0.05) 1px, transparent 0);
-      background-size: 40px 40px;
-    }
-
-    /* Editor Code Styling */
+    /* Mockup Editor */
     .editor-window {
-      border: 1px solid rgba(0, 200, 240, 0.2);
-      box-shadow: 0 40px 100px -20px rgba(0,0,0,0.7);
+      border: 1px solid rgba(0, 200, 240, 0.15);
+      box-shadow: 0 40px 100px -20px rgba(0,0,0,0.8);
     }
-    .t-tag { color: #5CC9F5; } .t-attr { color: #A5E075; } .t-val { color: #E5C07B; } .t-str { color: #98C379; }
-    .typing-cursor { border-right: 2px solid #00C8F0; animation: blink 1s infinite; }
+    .typing-cursor { border-right: 2px solid #00C8F0; animation: blink 0.8s infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Sintaxe Highlighting */
+    .t-tag { color: #5CC9F5; } .t-attr { color: #A5E075; } .t-val { color: #E5C07B; } .t-str { color: #98C379; }
   </style>
 </head>
 
 <body class="antialiased">
   <div class="bg-texture"></div>
 
-  <!-- ================= NAVBAR ================= -->
-  <nav id="navbar" class="fixed top-0 w-full z-[100] transition-all duration-500">
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 w-full z-[100] transition-all duration-500 py-4">
     <div class="max-w-7xl mx-auto px-6 lg:px-12">
       <div class="flex items-center justify-between h-20">
-        
-        <!-- Logo -->
         <a href="#hero" class="flex items-center gap-3 group">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1A6BB5] to-cyan flex items-center justify-center font-mono text-sm font-bold text-white shadow-lg shadow-cyan/10 group-hover:shadow-cyan/30 transition-all duration-500 group-hover:rotate-[10deg]">
             &lt;/&gt;
@@ -168,7 +154,6 @@
           </div>
         </a>
 
-        <!-- Desktop Links -->
         <div class="hidden md:flex items-center gap-10">
           <a href="#servicos" class="text-sm font-medium text-gray-lt hover:text-cyan transition-colors">Serviços</a>
           <a href="#quem-somos" class="text-sm font-medium text-gray-lt hover:text-cyan transition-colors">Quem Somos</a>
@@ -178,32 +163,22 @@
           </a>
         </div>
 
-        <!-- Mobile Menu -->
         <button id="menu-toggle" class="md:hidden text-white text-2xl" aria-label="Menu">
           <i class="fa-solid fa-bars-staggered"></i>
         </button>
       </div>
     </div>
-
-    <!-- Mobile Dropdown -->
-    <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full h-screen bg-navy/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 z-[-1]">
-      <a href="#servicos" class="text-3xl font-head font-bold text-white" onclick="toggleMenu()">Serviços</a>
-      <a href="#quem-somos" class="text-3xl font-head font-bold text-white" onclick="toggleMenu()">Quem Somos</a>
-      <a href="#contato" class="text-3xl font-head font-bold text-white" onclick="toggleMenu()">Contato</a>
-      <a href="#contato" class="btn-glow bg-cyan text-navy font-bold px-8 py-4 rounded-full" onclick="toggleMenu()">Orçamento</a>
-    </div>
   </nav>
 
-  <!-- ================= HERO ================= -->
-  <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
-    <div class="grid-bg"></div>
+  <!-- HERO SECTION -->
+  <section id="hero" class="relative min-h-screen flex items-center pt-24 overflow-hidden">
     <div class="hero-mesh"></div>
     
     <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         
-        <!-- Conteúdo Textual -->
-        <div data-aos="fade-right" data-aos-duration="1200">
+        <!-- Lado Esquerdo: Texto -->
+        <div data-aos="fade-right" data-aos-duration="1000">
           <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan/5 border border-cyan/10 mb-8">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span>
@@ -212,8 +187,8 @@
             <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-cyan">Disponível para novos projetos</span>
           </div>
 
-          <h1 class="font-head text-5xl md:text-7xl font-extrabold leading-[1.05] text-white mb-8">
-            <span class="opacity-50 font-normal italic">Crafting</span><br/>
+          <h1 class="headline-main text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold text-white mb-8">
+            <span class="opacity-40 font-normal italic">Crafting</span><br/>
             High-End <span class="text-highlight">Digital</span><br/>Experiences.
           </h1>
 
@@ -222,7 +197,7 @@
           </p>
 
           <div class="flex flex-wrap gap-5">
-            <a href="#contato" class="btn-glow flex items-center gap-3 bg-white text-navy font-bold px-8 py-4 rounded-xl hover:bg-cyan hover:text-navy transition-all group">
+            <a href="#contato" class="btn-glow flex items-center gap-3 bg-white text-navy font-bold px-8 py-4 rounded-xl hover:bg-cyan transition-all group">
               Começar Projeto
               <i class="fa-solid fa-arrow-right-long group-hover:translate-x-1 transition-transform"></i>
             </a>
@@ -244,45 +219,42 @@
           </div>
         </div>
 
-        <!-- Editor Mockup -->
-        <div class="relative lg:block" data-aos="zoom-in-up" data-aos-duration="1500">
-          <div class="editor-window rounded-2xl overflow-hidden bg-[#0A1628]/90 backdrop-blur-xl">
+        <!-- Lado Direito: Editor Mockup -->
+        <div class="relative" data-aos="zoom-in" data-aos-duration="1200">
+          <div class="editor-window rounded-2xl overflow-hidden bg-[#0A1628]/95 backdrop-blur-xl">
             <div class="bg-[#0d1629] px-5 py-4 flex items-center justify-between border-b border-white/5">
               <div class="flex gap-2">
-                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
               </div>
               <div class="text-[10px] font-mono text-gray-lt opacity-50">devduo_engine.py</div>
             </div>
             
-            <div class="p-8 font-mono text-sm leading-relaxed min-h-[350px]">
-              <div id="code-typing" class="text-gray-lt">
-                <!-- GSAP vai inserir o código aqui -->
-              </div>
+            <div class="p-8 font-mono text-[13px] leading-relaxed min-h-[320px] whitespace-pre-wrap">
+              <div id="code-typing" class="text-gray-lt"></div>
               <span class="typing-cursor"></span>
             </div>
 
             <div class="bg-[#0d1629] px-6 py-3 border-t border-white/5 flex items-center justify-between">
-              <div class="flex items-center gap-4">
-                <span class="text-[10px] text-[#27c93f] flex items-center gap-1">
+              <div class="flex items-center gap-4 text-[10px]">
+                <span class="text-[#27c93f] flex items-center gap-1">
                   <i class="fa-solid fa-circle-check"></i> System Stable
                 </span>
-                <span class="text-[10px] text-gray-lt opacity-40">Main Framework: Next.js 14</span>
               </div>
-              <div class="text-[10px] text-cyan font-bold">L-01 C-42</div>
+              <div class="text-cyan font-bold text-[10px]">L-01 C-42</div>
             </div>
           </div>
           
-          <!-- Elementos Flutuantes -->
-          <div class="absolute -bottom-10 -left-10 glass-card p-5 rounded-2xl animate-bounce" style="animation-duration: 4s;">
+          <!-- Speed Badge Floating -->
+          <div class="absolute -bottom-6 -left-6 glass-card p-4 rounded-xl shadow-2xl animate-bounce" style="animation-duration: 5s;">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-cyan/20 flex items-center justify-center text-cyan">
+              <div class="w-8 h-8 rounded-lg bg-cyan/20 flex items-center justify-center text-cyan">
                 <i class="fa-solid fa-gauge-high"></i>
               </div>
               <div>
-                <p class="text-[10px] uppercase text-gray">Speed Score</p>
-                <p class="text-sm font-bold text-white">99/100</p>
+                <p class="text-[9px] uppercase text-gray font-bold">Speed Score</p>
+                <p class="text-xs font-bold text-white">99/100</p>
               </div>
             </div>
           </div>
@@ -292,30 +264,16 @@
     </div>
   </section>
 
-  <!-- ================= SERVIÇOS ================= -->
+  <!-- SERVIÇOS -->
   <section id="servicos" class="py-32 relative">
     <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-      
       <div class="text-center mb-24" data-aos="fade-up">
-        <h2 class="font-head text-4xl md:text-6xl font-bold text-white mb-6">Soluções <span class="text-highlight">Estratégicas</span></h2>
+        <h2 class="font-head text-4xl md:text-5xl font-bold text-white mb-6">Soluções <span class="text-highlight">Estratégicas</span></h2>
         <p class="text-gray-lt max-w-2xl mx-auto text-lg font-light">Transformamos tecnologia em vantagem competitiva. Sites que não apenas existem, mas performam.</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="glass-card p-10 rounded-[2.5rem] group" data-aos="fade-up" data-aos-delay="100">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan/20 to-blue-500/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-            <i class="fa-solid fa-chess-knight text-3xl text-cyan"></i>
-          </div>
-          <h3 class="font-head text-2xl font-bold text-white mb-4">Sites Institucionais</h3>
-          <p class="text-gray-lt text-sm leading-relaxed mb-8 opacity-70">Autoridade digital para marcas que buscam liderança. Design clean com UX focado em credibilidade.</p>
-          <ul class="space-y-4 text-xs font-medium text-white/80">
-            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> Estrutura Escalável</li>
-            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> SEO On-Page</li>
-          </ul>
-        </div>
-
-        <!-- Card 2 (Destaque) -->
+        <!-- Landing Pages -->
         <div class="glass-card p-10 rounded-[2.5rem] border-cyan/20 relative group" data-aos="fade-up" data-aos-delay="200">
           <div class="absolute top-8 right-8 text-[10px] font-bold text-cyan uppercase tracking-widest bg-cyan/10 px-3 py-1 rounded-full">Top Seller</div>
           <div class="w-16 h-16 rounded-2xl bg-cyan flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(0,200,240,0.3)]">
@@ -329,9 +287,22 @@
           </ul>
         </div>
 
-        <!-- Card 3 -->
+        <!-- Institucionais -->
+        <div class="glass-card p-10 rounded-[2.5rem] group" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan/20 to-blue-500/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-building-shield text-3xl text-cyan"></i>
+          </div>
+          <h3 class="font-head text-2xl font-bold text-white mb-4">Sites Institucionais</h3>
+          <p class="text-gray-lt text-sm leading-relaxed mb-8 opacity-70">Autoridade digital para marcas que buscam liderança. Design clean com UX focado em credibilidade.</p>
+          <ul class="space-y-4 text-xs font-medium text-white/80">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> Estrutura Escalável</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> SEO On-Page</li>
+          </ul>
+        </div>
+
+        <!-- Performance -->
         <div class="glass-card p-10 rounded-[2.5rem] group" data-aos="fade-up" data-aos-delay="300">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan/20 to-blue-500/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan/20 to-blue-500/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
             <i class="fa-solid fa-bolt-lightning text-3xl text-cyan"></i>
           </div>
           <h3 class="font-head text-2xl font-bold text-white mb-4">Alta Performance</h3>
@@ -345,141 +316,126 @@
     </div>
   </section>
 
-  <!-- ================= QUEM SOMOS ================= -->
-  <section id="quem-somos" class="py-32 relative bg-navy-900/50">
+  <!-- QUEM SOMOS -->
+  <section id="quem-somos" class="py-32 relative bg-navy-900/40">
     <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-      <div class="grid lg:grid-cols-2 gap-20 items-center">
-        
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div data-aos="fade-right">
-          <h2 class="font-head text-4xl md:text-6xl font-bold text-white mb-8">A <span class="text-highlight">Duo-Core</span><br/>por trás do código.</h2>
+          <h2 class="font-head text-4xl md:text-5xl font-bold text-white mb-8">A <span class="text-highlight">Duo-Core</span><br/>por trás do código.</h2>
           <p class="text-gray-lt text-lg font-light leading-relaxed mb-10">
             Sem atendimento automatizado ou gerentes de conta. Você trata direto com os arquitetos da sua solução. Raphael e Piter unem design intuitivo com lógica robusta.
           </p>
-          <div class="flex items-center gap-4 p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur">
-            <div class="w-12 h-12 rounded-full bg-cyan/20 flex items-center justify-center text-cyan">
+          <div class="flex items-center gap-4 p-5 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+            <div class="w-10 h-10 rounded-full bg-cyan/20 flex items-center justify-center text-cyan">
               <i class="fa-solid fa-code-branch"></i>
             </div>
-            <p class="text-sm font-medium text-white">Mais de 5 anos de experiência no mercado de tecnologia em Belo Horizonte.</p>
+            <p class="text-xs font-medium text-white opacity-80">Especialistas em desenvolvimento ágil de Belo Horizonte.</p>
           </div>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-8" data-aos="fade-left">
-          <!-- Raphael -->
           <div class="glass-card p-8 rounded-3xl text-center group">
-            <div class="relative w-24 h-24 mx-auto mb-6">
+            <div class="relative w-20 h-20 mx-auto mb-6">
               <div class="absolute inset-0 bg-cyan blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
-              <div class="relative w-full h-full rounded-full bg-gradient-to-br from-cyan to-blue-600 flex items-center justify-center text-2xl font-bold text-white border-2 border-cyan/30">
+              <div class="relative w-full h-full rounded-full bg-gradient-to-br from-cyan to-blue-600 flex items-center justify-center text-xl font-bold text-white border border-cyan/30">
                 RF
               </div>
             </div>
-            <h3 class="font-head font-bold text-xl text-white">Raphael Ferrari</h3>
-            <p class="text-cyan text-[10px] uppercase tracking-[0.2em] mt-2 mb-6">Front-end Architect</p>
-            <div class="flex justify-center gap-4">
-              <a href="https://wa.me/5531993404537" class="text-gray-lt hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
-              <a href="https://www.linkedin.com/in/raphael-ferrari-16b919199/" class="text-gray-lt hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+            <h3 class="font-head font-bold text-lg text-white">Raphael Ferrari</h3>
+            <p class="text-cyan text-[9px] uppercase tracking-[0.2em] mt-1 mb-6 opacity-80">Front-end Architect</p>
+            <div class="flex justify-center gap-4 text-gray-lt">
+              <a href="https://wa.me/5531993404537" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="https://www.linkedin.com/in/raphael-ferrari-16b919199/" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
           </div>
 
-          <!-- Piter -->
           <div class="glass-card p-8 rounded-3xl text-center group">
-            <div class="relative w-24 h-24 mx-auto mb-6">
+            <div class="relative w-20 h-20 mx-auto mb-6">
               <div class="absolute inset-0 bg-blue-600 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
-              <div class="relative w-full h-full rounded-full bg-gradient-to-br from-blue-700 to-cyan flex items-center justify-center text-2xl font-bold text-white border-2 border-white/10">
+              <div class="relative w-full h-full rounded-full bg-gradient-to-br from-blue-700 to-cyan flex items-center justify-center text-xl font-bold text-white border border-white/10">
                 PA
               </div>
             </div>
-            <h3 class="font-head font-bold text-xl text-white">Piter Alex</h3>
-            <p class="text-cyan text-[10px] uppercase tracking-[0.2em] mt-2 mb-6">Lead UI Engineer</p>
-            <div class="flex justify-center gap-4">
-              <a href="https://wa.me/5531987958165" class="text-gray-lt hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
-              <a href="https://www.linkedin.com/in/piter-alex-19a849219/" class="text-gray-lt hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+            <h3 class="font-head font-bold text-lg text-white">Piter Alex</h3>
+            <p class="text-cyan text-[9px] uppercase tracking-[0.2em] mt-1 mb-6 opacity-80">Lead UI Engineer</p>
+            <div class="flex justify-center gap-4 text-gray-lt">
+              <a href="https://wa.me/5531987958165" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="https://www.linkedin.com/in/piter-alex-19a849219/" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ================= CONTATO ================= -->
+  <!-- CONTATO -->
   <section id="contato" class="py-32 relative">
     <div class="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
-      
-      <div class="glass-card rounded-[3rem] p-12 md:p-20 overflow-hidden relative" data-aos="zoom-in">
+      <div class="glass-card rounded-[3rem] p-10 md:p-16 overflow-hidden relative" data-aos="zoom-in">
         <div class="absolute top-0 right-0 w-64 h-64 bg-cyan/10 blur-[80px] rounded-full -mr-32 -mt-32"></div>
         
-        <div class="text-center mb-16">
-          <h2 class="font-head text-4xl md:text-5xl font-bold text-white mb-6">Pronto para <span class="text-highlight">Escalar?</span></h2>
-          <p class="text-gray-lt text-sm">Preencha o formulário e nossa IA de contato enviará os detalhes para nosso time humano no WhatsApp.</p>
+        <div class="text-center mb-12">
+          <h2 class="font-head text-4xl md:text-5xl font-bold text-white mb-4">Vamos <span class="text-highlight">Escalar?</span></h2>
+          <p class="text-gray-lt text-sm opacity-80">Preencha os dados e fale diretamente com o nosso time técnico no WhatsApp.</p>
         </div>
 
-        <form id="contact-form" class="space-y-8" onsubmit="enviarWhatsApp(event)">
-          <div class="grid md:grid-cols-2 gap-8">
-            <div class="space-y-2">
-              <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Identificação</label>
-              <input type="text" id="nome" required placeholder="Seu Nome Completo" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/50 focus:bg-white/10 transition-all" />
+        <form id="contact-form" class="space-y-6" onsubmit="enviarWhatsApp(event)">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-1">
+              <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Nome</label>
+              <input type="text" id="nome" required placeholder="Como podemos te chamar?" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all text-sm" />
             </div>
-            <div class="space-y-2">
-              <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Contato Direto</label>
-              <input type="tel" id="telefone" placeholder="(31) 99999-9999" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/50 transition-all" />
+            <div class="space-y-1">
+              <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">WhatsApp</label>
+              <input type="tel" id="telefone" placeholder="(31) 99999-9999" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all text-sm" />
             </div>
           </div>
 
-          <div class="space-y-2">
-            <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Categoria do Projeto</label>
-            <select id="servico" class="w-full bg-navy border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/50 appearance-none cursor-pointer">
+          <div class="space-y-1">
+            <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Serviço</label>
+            <select id="servico" class="w-full bg-navy border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 appearance-none cursor-pointer text-sm">
               <option value="Não definido">Selecione uma opção...</option>
               <option value="Landing Page">Landing Page High-Performance</option>
               <option value="Site Institucional">Site Corporativo Premium</option>
-              <option value="Otimização/Performance">Code Review & Performance Otimização</option>
-              <option value="Outro">Custom Project / Consultoria</option>
+              <option value="Otimização/Performance">Otimização de Performance</option>
+              <option value="Outro">Projeto Customizado</option>
             </select>
           </div>
 
-          <div class="space-y-2">
-            <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Breve Briefing</label>
-            <textarea id="mensagem" required rows="4" placeholder="Fale sobre seu negócio e objetivos..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/50 transition-all resize-none"></textarea>
+          <div class="space-y-1">
+            <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Briefing</label>
+            <textarea id="mensagem" required rows="4" placeholder="Conte-nos brevemente sobre o seu projeto..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all resize-none text-sm"></textarea>
           </div>
 
-          <button type="submit" class="btn-glow w-full bg-cyan text-navy font-black text-sm uppercase tracking-widest py-6 rounded-2xl shadow-[0_20px_40px_rgba(0,200,240,0.2)] hover:shadow-[0_20px_50px_rgba(0,200,240,0.4)]">
-            Start Conversation on WhatsApp <i class="fa-brands fa-whatsapp ml-2 text-lg"></i>
+          <button type="submit" class="btn-glow w-full bg-cyan text-navy font-black text-xs uppercase tracking-[0.2em] py-5 rounded-2xl shadow-xl hover:shadow-cyan/20">
+            Iniciar Orçamento no WhatsApp <i class="fa-brands fa-whatsapp ml-2"></i>
           </button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
+  <!-- FOOTER -->
   <footer class="py-12 border-t border-white/5 relative bg-navy-900">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-        
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-mono text-[10px] text-white">
-            &lt;/&gt;
-          </div>
-          <span class="font-head font-bold text-white text-sm tracking-widest uppercase">Dev Duo</span>
-        </div>
-
-        <p class="text-gray opacity-40 text-[10px] font-mono tracking-tighter text-center">
-          ENGINEERED WITH PASSION IN BH &copy; 2026. ALL RIGHTS RESERVED.
-        </p>
-
-        <div class="flex gap-6 text-gray-lt text-sm">
-          <a href="#" class="hover:text-cyan transition-colors"><i class="fa-brands fa-github"></i></a>
-          <a href="#" class="hover:text-cyan transition-colors"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" class="hover:text-cyan transition-colors"><i class="fa-brands fa-dribbble"></i></a>
-        </div>
-
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-mono text-[10px] text-white">&lt;/&gt;</div>
+        <span class="font-head font-bold text-white text-xs tracking-widest uppercase">Dev Duo Sites</span>
+      </div>
+      <p class="text-gray opacity-40 text-[9px] font-mono tracking-widest text-center">
+        EST. 2026 • BH & CONTAGEM • HIGH PERFORMANCE WEB ENGINEERING
+      </p>
+      <div class="flex gap-6 text-gray-lt text-sm opacity-60">
+        <a href="#" class="hover:text-cyan"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="hover:text-cyan"><i class="fa-brands fa-linkedin-in"></i></a>
       </div>
     </div>
   </footer>
 
-  <!-- ================= SCRIPTS ================= -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Initialize AOS
-    AOS.init({ once: true });
+    // Inicia AOS com configurações de suavidade
+    AOS.init({ once: true, duration: 800, offset: 100 });
 
     // Navbar Scroll Refinement
     window.addEventListener('scroll', () => {
@@ -502,33 +458,31 @@
     }
     menuToggle.addEventListener('click', toggleMenu);
 
-    // Hero Code Typing Animation (GSAP)
-    const codeText = `
-def build_presence():
+    // Typing Animation (GSAP)
+    const codeText = `def build_presence():
     client = "Dev Duo"
     goal = "Conversion & Speed"
     
-    # Executing High-End LP
+    # Executing High-End Stack
     stack = ["Next.js", "GSAP", "Tailwind"]
     
     for tool in stack:
         optimize_performance(tool)
         
-    return "Project Successfully Deployed"
-    `;
+    return "Project Successfully Deployed"`;
 
     const typingContainer = document.getElementById('code-typing');
-    let i = 0;
+    let charIndex = 0;
     function typeEffect() {
-      if (i < codeText.length) {
-        typingContainer.innerHTML += codeText.charAt(i);
-        i++;
-        setTimeout(typeEffect, 15);
+      if (charIndex < codeText.length) {
+        typingContainer.innerHTML += codeText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeEffect, 20);
       }
     }
     window.onload = typeEffect;
 
-    // Form Handling
+    // Form WhatsApp Logic
     function enviarWhatsApp(e) {
       e.preventDefault();
       const nome = document.getElementById('nome').value;
