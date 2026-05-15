@@ -56,12 +56,13 @@
       overflow-x: hidden;
     }
 
-    /* Correção de Sobreposição de Letras */
+    /* FIX DEFINITIVO: Tipografia menor e com respiro vertical seguro */
     .headline-main {
       font-family: 'Syne', sans-serif;
-      line-height: 1.15; /* Aumentado de 1.05 para evitar colisões verticais */
-      letter-spacing: -0.01em; /* Reduzido de tight para quase normal para evitar colisões horizontais */
+      line-height: 1.4; /* Espaço generoso para evitar colisões entre descidas e subidas */
+      letter-spacing: 0.02em;
       text-wrap: balance;
+      word-break: keep-all;
     }
 
     /* Scrollbar Premium */
@@ -84,7 +85,7 @@
       z-index: -1;
     }
 
-    /* Glassmorphism Refinado */
+    /* Glassmorphism */
     .glass-nav {
       background: rgba(7, 13, 26, 0.7);
       backdrop-filter: blur(20px) saturate(180%);
@@ -101,7 +102,6 @@
     .glass-card:hover {
       border-color: rgba(0, 200, 240, 0.3);
       transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     /* Destaque de Texto */
@@ -109,7 +109,6 @@
       background: linear-gradient(90deg, #00C8F0, #1A6BB5);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      white-space: nowrap;
     }
 
     /* Botões */
@@ -144,26 +143,26 @@
   <nav id="navbar" class="fixed top-0 w-full z-[100] transition-all duration-500 py-4">
     <div class="max-w-7xl mx-auto px-6 lg:px-12">
       <div class="flex items-center justify-between h-20">
-        <a href="#hero" class="flex items-center gap-3 group">
+        <a href="#hero" class="flex items-center gap-3 group" aria-label="Voltar ao início">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1A6BB5] to-cyan flex items-center justify-center font-mono text-sm font-bold text-white shadow-lg shadow-cyan/10 group-hover:shadow-cyan/30 transition-all duration-500 group-hover:rotate-[10deg]">
             &lt;/&gt;
           </div>
-          <div class="flex flex-col">
-            <span class="font-head font-bold text-xl text-white tracking-tight">DEV DUO</span>
+          <div class="flex flex-col leading-tight">
+            <span class="font-head font-bold text-xl text-white">DEV DUO</span>
             <span class="font-body text-[9px] text-cyan tracking-[0.3em] uppercase opacity-70">Tech Systems</span>
           </div>
         </a>
 
         <div class="hidden md:flex items-center gap-10">
-          <a href="#servicos" class="text-sm font-medium text-gray-lt hover:text-cyan transition-colors">Serviços</a>
-          <a href="#quem-somos" class="text-sm font-medium text-gray-lt hover:text-cyan transition-colors">Quem Somos</a>
-          <a href="#contato" class="text-sm font-medium text-gray-lt hover:text-cyan transition-colors">Contato</a>
-          <a href="#contato" class="btn-glow bg-cyan text-navy font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:shadow-[0_0_20px_rgba(0,200,240,0.4)]">
+          <a href="#servicos" class="text-sm font-medium text-gray-lt hover:text-white transition-colors">Serviços</a>
+          <a href="#quem-somos" class="text-sm font-medium text-gray-lt hover:text-white transition-colors">Quem Somos</a>
+          <a href="#contato" class="text-sm font-medium text-gray-lt hover:text-white transition-colors">Contato</a>
+          <a href="#contato" class="btn-glow bg-cyan text-navy font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full">
             Solicitar Orçamento
           </a>
         </div>
 
-        <button id="menu-toggle" class="md:hidden text-white text-2xl" aria-label="Menu">
+        <button id="menu-toggle" class="md:hidden text-white text-2xl" aria-label="Abrir Menu">
           <i class="fa-solid fa-bars-staggered"></i>
         </button>
       </div>
@@ -177,9 +176,9 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         
-        <!-- Lado Esquerdo: Texto -->
-        <div data-aos="fade-right" data-aos-duration="1000">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan/5 border border-cyan/10 mb-8">
+        <!-- Lado Esquerdo: Texto (Bloco Ajustado: Menor e mais à direita) -->
+        <div class="lg:pl-12" data-aos="fade-right" data-aos-duration="1000">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan/5 border border-cyan/10 mb-8">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan"></span>
@@ -187,12 +186,13 @@
             <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-cyan">Disponível para novos projetos</span>
           </div>
 
-          <h1 class="headline-main text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold text-white mb-8">
+          <!-- Headline com tamanho reduzido para evitar sobreposições e melhorar harmonia -->
+          <h1 class="headline-main text-3xl sm:text-5xl lg:text-[3.2rem] font-extrabold text-white mb-8">
             <span class="opacity-40 font-normal italic">Crafting</span><br/>
             High-End <span class="text-highlight">Digital</span><br/>Experiences.
           </h1>
 
-          <p class="text-lg text-gray-lt font-light leading-relaxed max-w-lg mb-10">
+          <p class="text-lg text-gray-lt font-light leading-relaxed max-w-md mb-10">
             Landing Pages e Sites Institucionais feitos por <strong class="text-white font-medium">devs de BH</strong>. Código artesanal, performance extrema e conversão validada.
           </p>
 
@@ -231,7 +231,7 @@
               <div class="text-[10px] font-mono text-gray-lt opacity-50">devduo_engine.py</div>
             </div>
             
-            <div class="p-8 font-mono text-[13px] leading-relaxed min-h-[320px] whitespace-pre-wrap">
+            <div class="p-8 font-mono text-[13px] leading-relaxed min-h-[300px] whitespace-pre-wrap">
               <div id="code-typing" class="text-gray-lt"></div>
               <span class="typing-cursor"></span>
             </div>
@@ -269,7 +269,7 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
       <div class="text-center mb-24" data-aos="fade-up">
         <h2 class="font-head text-4xl md:text-5xl font-bold text-white mb-6">Soluções <span class="text-highlight">Estratégicas</span></h2>
-        <p class="text-gray-lt max-w-2xl mx-auto text-lg font-light">Transformamos tecnologia em vantagem competitiva. Sites que não apenas existem, mas performam.</p>
+        <p class="text-gray-lt max-w-2xl mx-auto text-lg font-light leading-relaxed">Transformamos tecnologia em vantagem competitiva. Sites que não apenas existem, mas performam com excelência.</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
@@ -280,7 +280,7 @@
             <i class="fa-solid fa-fire-flame-curved text-3xl text-navy"></i>
           </div>
           <h3 class="font-head text-2xl font-bold text-white mb-4">Landing Pages</h3>
-          <p class="text-gray-lt text-sm leading-relaxed mb-8 opacity-70">Engenharia de conversão. Cada clique é mapeado, cada CTA é testado para maximizar seu ROI.</p>
+          <p class="text-gray-lt text-sm leading-relaxed mb-8 opacity-70">Engenharia de conversão. Cada clique é mapeado, cada CTA é testado para maximizar seu ROI de forma agressiva.</p>
           <ul class="space-y-4 text-xs font-medium text-white/80">
             <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> Copy Persuasivo</li>
             <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> Tracking Avançado</li>
@@ -293,7 +293,7 @@
             <i class="fa-solid fa-building-shield text-3xl text-cyan"></i>
           </div>
           <h3 class="font-head text-2xl font-bold text-white mb-4">Sites Institucionais</h3>
-          <p class="text-gray-lt text-sm leading-relaxed mb-8 opacity-70">Autoridade digital para marcas que buscam liderança. Design clean com UX focado em credibilidade.</p>
+          <p class="text-gray-lt text-sm leading-relaxed mb-8 opacity-70">Autoridade digital para marcas que buscam liderança. Design clean com UX focado em credibilidade e confiança.</p>
           <ul class="space-y-4 text-xs font-medium text-white/80">
             <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> Estrutura Escalável</li>
             <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> SEO On-Page</li>
@@ -306,7 +306,7 @@
             <i class="fa-solid fa-bolt-lightning text-3xl text-cyan"></i>
           </div>
           <h3 class="font-head text-2xl font-bold text-white mb-4">Alta Performance</h3>
-          <p class="text-gray-lt text-sm leading-relaxed mb-8 opacity-70">Otimização técnica agressiva para Core Web Vitals. Velocidade que o Google ama e seus clientes sentem.</p>
+          <p class="text-gray-lt text-sm leading-relaxed mb-8 opacity-70">Otimização técnica agressiva para Core Web Vitals. Velocidade que o Google ama e seus clientes sentem na ponta dos dedos.</p>
           <ul class="space-y-4 text-xs font-medium text-white/80">
             <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> Cache Inteligente</li>
             <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyan"></i> Asset Compression</li>
@@ -323,17 +323,18 @@
         <div data-aos="fade-right">
           <h2 class="font-head text-4xl md:text-5xl font-bold text-white mb-8">A <span class="text-highlight">Duo-Core</span><br/>por trás do código.</h2>
           <p class="text-gray-lt text-lg font-light leading-relaxed mb-10">
-            Sem atendimento automatizado ou gerentes de conta. Você trata direto com os arquitetos da sua solução. Raphael e Piter unem design intuitivo com lógica robusta.
+            Sem atendimento automatizado ou gerentes de conta intermediários. Você trata direto com os arquitetos da sua solução digital. Raphael e Piter unem design intuitivo com lógica robusta.
           </p>
           <div class="flex items-center gap-4 p-5 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
             <div class="w-10 h-10 rounded-full bg-cyan/20 flex items-center justify-center text-cyan">
               <i class="fa-solid fa-code-branch"></i>
             </div>
-            <p class="text-xs font-medium text-white opacity-80">Especialistas em desenvolvimento ágil de Belo Horizonte.</p>
+            <p class="text-xs font-medium text-white opacity-80">Especialistas em desenvolvimento ágil e performance de Belo Horizonte.</p>
           </div>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-8" data-aos="fade-left">
+          <!-- Raphael -->
           <div class="glass-card p-8 rounded-3xl text-center group">
             <div class="relative w-20 h-20 mx-auto mb-6">
               <div class="absolute inset-0 bg-cyan blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
@@ -344,11 +345,12 @@
             <h3 class="font-head font-bold text-lg text-white">Raphael Ferrari</h3>
             <p class="text-cyan text-[9px] uppercase tracking-[0.2em] mt-1 mb-6 opacity-80">Front-end Architect</p>
             <div class="flex justify-center gap-4 text-gray-lt">
-              <a href="https://wa.me/5531993404537" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
-              <a href="https://www.linkedin.com/in/raphael-ferrari-16b919199/" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="https://wa.me/5531993404537" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="WhatsApp Raphael Ferrari"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="https://www.linkedin.com/in/raphael-ferrari-16b919199/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="LinkedIn Raphael Ferrari"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
           </div>
 
+          <!-- Piter -->
           <div class="glass-card p-8 rounded-3xl text-center group">
             <div class="relative w-20 h-20 mx-auto mb-6">
               <div class="absolute inset-0 bg-blue-600 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
@@ -359,8 +361,8 @@
             <h3 class="font-head font-bold text-lg text-white">Piter Alex</h3>
             <p class="text-cyan text-[9px] uppercase tracking-[0.2em] mt-1 mb-6 opacity-80">Lead UI Engineer</p>
             <div class="flex justify-center gap-4 text-gray-lt">
-              <a href="https://wa.me/5531987958165" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
-              <a href="https://www.linkedin.com/in/piter-alex-19a849219/" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="https://wa.me/5531987958165" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="WhatsApp Piter Alex"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="https://www.linkedin.com/in/piter-alex-19a849219/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="LinkedIn Piter Alex"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
           </div>
         </div>
@@ -376,23 +378,23 @@
         
         <div class="text-center mb-12">
           <h2 class="font-head text-4xl md:text-5xl font-bold text-white mb-4">Vamos <span class="text-highlight">Escalar?</span></h2>
-          <p class="text-gray-lt text-sm opacity-80">Preencha os dados e fale diretamente com o nosso time técnico no WhatsApp.</p>
+          <p class="text-gray-lt text-sm opacity-80 leading-relaxed">Preencha os dados e fale diretamente com o nosso time técnico no WhatsApp para uma consultoria imediata.</p>
         </div>
 
         <form id="contact-form" class="space-y-6" onsubmit="enviarWhatsApp(event)">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-1">
               <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Nome</label>
-              <input type="text" id="nome" required placeholder="Como podemos te chamar?" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all text-sm" />
+              <input type="text" id="nome" required placeholder="Como podemos te chamar?" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all text-sm" autocomplete="name" />
             </div>
             <div class="space-y-1">
               <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">WhatsApp</label>
-              <input type="tel" id="telefone" placeholder="(31) 99999-9999" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all text-sm" />
+              <input type="tel" id="telefone" placeholder="(31) 99999-9999" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all text-sm" autocomplete="tel" />
             </div>
           </div>
 
           <div class="space-y-1">
-            <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Serviço</label>
+            <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Serviço de Interesse</label>
             <select id="servico" class="w-full bg-navy border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 appearance-none cursor-pointer text-sm">
               <option value="Não definido">Selecione uma opção...</option>
               <option value="Landing Page">Landing Page High-Performance</option>
@@ -403,12 +405,12 @@
           </div>
 
           <div class="space-y-1">
-            <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Briefing</label>
-            <textarea id="mensagem" required rows="4" placeholder="Conte-nos brevemente sobre o seu projeto..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all resize-none text-sm"></textarea>
+            <label class="text-[10px] font-bold text-cyan uppercase tracking-widest ml-4">Resumo do Projeto</label>
+            <textarea id="mensagem" required rows="4" placeholder="Conte-nos brevemente sobre o seu negócio e objetivos..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan/40 transition-all resize-none text-sm"></textarea>
           </div>
 
-          <button type="submit" class="btn-glow w-full bg-cyan text-navy font-black text-xs uppercase tracking-[0.2em] py-5 rounded-2xl shadow-xl hover:shadow-cyan/20">
-            Iniciar Orçamento no WhatsApp <i class="fa-brands fa-whatsapp ml-2"></i>
+          <button type="submit" class="btn-glow w-full bg-cyan text-navy font-black text-xs uppercase tracking-[0.2em] py-5 rounded-2xl shadow-xl hover:shadow-cyan/20 transition-all">
+            Iniciar Consultoria no WhatsApp <i class="fa-brands fa-whatsapp ml-2"></i>
           </button>
         </form>
       </div>
@@ -423,21 +425,21 @@
         <span class="font-head font-bold text-white text-xs tracking-widest uppercase">Dev Duo Sites</span>
       </div>
       <p class="text-gray opacity-40 text-[9px] font-mono tracking-widest text-center">
-        EST. 2026 • BH & CONTAGEM • HIGH PERFORMANCE WEB ENGINEERING
+        EST. 2026 • BH & CONTAGEM • HIGH PERFORMANCE WEB ENGINEERING • SECURITY AUDITED
       </p>
       <div class="flex gap-6 text-gray-lt text-sm opacity-60">
-        <a href="#" class="hover:text-cyan"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="hover:text-cyan"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="hover:text-cyan" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="hover:text-cyan" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
       </div>
     </div>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Inicia AOS com configurações de suavidade
+    // Inicia AOS
     AOS.init({ once: true, duration: 800, offset: 100 });
 
-    // Navbar Scroll Refinement
+    // Navbar Scroll
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
       if (window.scrollY > 50) {
@@ -482,17 +484,24 @@
     }
     window.onload = typeEffect;
 
-    // Form WhatsApp Logic
+    // Form WhatsApp Security Sanitization
     function enviarWhatsApp(e) {
       e.preventDefault();
-      const nome = document.getElementById('nome').value;
-      const tel = document.getElementById('telefone').value;
-      const serv = document.getElementById('servico').value;
-      const msg = document.getElementById('mensagem').value;
       
+      const sanitize = (str) => str.replace(/[<>\"\'&]/g, '').trim();
+
+      const nome = sanitize(document.getElementById('nome').value);
+      const tel = sanitize(document.getElementById('telefone').value);
+      const serv = document.getElementById('servico').value;
+      const msg = sanitize(document.getElementById('mensagem').value);
+      
+      if (!nome || !msg) return;
+
       const texto = `🚀 *NOVO LEAD TECH* 🚀\n\n*Cliente:* ${nome}\n*WhatsApp:* ${tel}\n*Interesse:* ${serv}\n\n*Briefing:* ${msg}`;
       const url = `https://wa.me/5531993404537?text=${encodeURIComponent(texto)}`;
-      window.open(url, '_blank');
+      
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+      if (newWindow) newWindow.opener = null;
     }
   </script>
 </body>
